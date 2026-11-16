@@ -1,4 +1,5 @@
-﻿using Assignment18.Models;
+﻿using Assignment18.Configurations;
+using Assignment18.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,18 @@ namespace Assignment18.Contexts
             optionsBuilder.UseSqlServer("Server=.;Database=EventHub;Trusted_Connection=True;trustServerCertificate=true");
         }
 
+        override protected void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrganizerProfile>(O => 
+            { 
+                O.Property(O => O.Biography).HasMaxLength(500)
+                                            .IsRequired(true)
+                                            .HasColumnName("Bio");
+                O.Property(O => O.Website).HasMaxLength(200);
+            });
+            modelBuilder.ApplyConfiguration(new EventConfig());
+            modelBuilder.ApplyConfiguration(new BadgeConfig());
+        }
         public DbSet<Organizer> Organizers { get; set; }
         public DbSet<OrganizerProfile> OrganizerProfiles { get; set; }
         public DbSet<Attendee> Attendees { get; set; }
