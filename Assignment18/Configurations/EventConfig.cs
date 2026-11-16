@@ -15,8 +15,6 @@ namespace Assignment18.Configurations
         {
             E.Property(E => E.Title).HasMaxLength(200)
                                     .IsRequired(true);
-            E.Property(E => E.Name).HasMaxLength(200)
-                                   .IsRequired(true);
             E.Property(E => E.Description).HasMaxLength(500);
         }
     }

@@ -24,6 +24,8 @@ namespace Assignment18.Contexts
                                             .IsRequired(true)
                                             .HasColumnName("Bio");
                 O.Property(O => O.Website).HasMaxLength(200);
+                O.Property(O => O.Id).ValueGeneratedNever();
+                O.Property(O => O.Logo).HasMaxLength(120);
             });
             modelBuilder.ApplyConfiguration(new EventConfig());
             modelBuilder.ApplyConfiguration(new BadgeConfig());

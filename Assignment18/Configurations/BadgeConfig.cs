@@ -15,7 +15,12 @@ namespace Assignment18.Configurations
         {
             B.ToTable("EventBadges");
             B.Property(b => b.Tier)
-             .HasConversion<string>();
+             .HasConversion<string>()
+             .HasMaxLength(100);
+            B.Property(b => b.IssueDate)
+             .HasColumnType("datetime2");
+            B.Property(b => b.BadgeNumber)
+             .HasMaxLength(50);
         }
     }
 }
